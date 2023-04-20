@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:playon/providers/home_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +13,8 @@ class HomeAppBar extends StatelessWidget {
     final HomeProvider state = context.watch<HomeProvider>();
     final double scrollOffset = state.scrollOffset;
     final String active = state.activeMenu;
-
-    final Color color =
-        Colors.black.withOpacity((scrollOffset / 250).clamp(0, 1).toDouble());
+    final double opactiy = (scrollOffset / 250).clamp(0, 1).toDouble();
+    final Color color = Colors.black.withOpacity(opactiy);
 
     return AppBar(
       leadingWidth: double.infinity,
@@ -49,14 +47,6 @@ class HomeAppBar extends StatelessWidget {
       ),
       surfaceTintColor: Colors.black,
       shadowColor: Colors.black,
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Iconsax.search_normal_1, color: Colors.white),
-          style: IconButton.styleFrom(backgroundColor: Colors.white10),
-        ),
-        const SizedBox(width: 8.0),
-      ],
     );
   }
 }

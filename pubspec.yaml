@@ -17,6 +17,8 @@ dependencies:
   iconsax: ^0.0.8
   provider: ^6.0.5
   dio: ^5.1.1
+  uicons: ^1.0.1
+  shared_preferences: ^2.1.0
 
 dev_dependencies:
   flutter_test:

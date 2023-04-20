@@ -408,6 +408,62 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  shared_preferences:
+    dependency: "direct main"
+    description:
+      name: shared_preferences
+      sha256: "858aaa72d8f61637d64e776aca82e1c67e6d9ee07979123c5d17115031c1b13b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  shared_preferences_android:
+    dependency: transitive
+    description:
+      name: shared_preferences_android
+      sha256: "7fa90471a6875d26ad78c7e4a675874b2043874586891128dc5899662c97db46"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
+  shared_preferences_foundation:
+    dependency: transitive
+    description:
+      name: shared_preferences_foundation
+      sha256: "0c1c16c56c9708aa9c361541a6f0e5cc6fc12a3232d866a687a7b7db30032b07"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.1"
+  shared_preferences_linux:
+    dependency: transitive
+    description:
+      name: shared_preferences_linux
+      sha256: "9d387433ca65717bbf1be88f4d5bb18f10508917a8fa2fb02e0fd0d7479a9afa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  shared_preferences_platform_interface:
+    dependency: transitive
+    description:
+      name: shared_preferences_platform_interface
+      sha256: fb5cf25c0235df2d0640ac1b1174f6466bd311f621574997ac59018a6664548d
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  shared_preferences_web:
+    dependency: transitive
+    description:
+      name: shared_preferences_web
+      sha256: "74083203a8eae241e0de4a0d597dbedab3b8fef5563f33cf3c12d7e93c655ca5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  shared_preferences_windows:
+    dependency: transitive
+    description:
+      name: shared_preferences_windows
+      sha256: "5e588e2efef56916a3b229c3bfe81e6a525665a454519ca51dbcc4236a274173"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -493,6 +549,70 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  uicons:
+    dependency: "direct main"
+    description:
+      name: uicons
+      sha256: "07c9d221c76462b6f6f7e41bb36db3826a9da4ad166167f7a5f9d629b0136483"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  uicons_bold_rounded:
+    dependency: transitive
+    description:
+      name: uicons_bold_rounded
+      sha256: d0cb77efa94e6737a8e25a385c9164d5099e543373a415313eb457f9b7e5d94e
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  uicons_bold_straight:
+    dependency: transitive
+    description:
+      name: uicons_bold_straight
+      sha256: f2d6649748744b424a689082868374636d9bea4cea1db15da6ba288b5e9a0b8e
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  uicons_brands:
+    dependency: transitive
+    description:
+      name: uicons_brands
+      sha256: "4bffb4681e55cfb43c11a773c1976b9a3930723883ae67bafa9d92fba7ab7c5f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  uicons_regular_rounded:
+    dependency: transitive
+    description:
+      name: uicons_regular_rounded
+      sha256: "80bf870676524fb48698a2e2037e76de6e81d5d10999191362a89de946fad541"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  uicons_regular_straight:
+    dependency: transitive
+    description:
+      name: uicons_regular_straight
+      sha256: "967cbcbc75f2b5247b7c6018a8594a6e36745e37146531bc726ab5ffde4e9e4f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  uicons_solid_rounded:
+    dependency: transitive
+    description:
+      name: uicons_solid_rounded
+      sha256: "2a8ee5654941f9777bddf109acc691b60211bdef6d0249851968ce9aa220473f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  uicons_solid_straight:
+    dependency: transitive
+    description:
+      name: uicons_solid_straight
+      sha256: a751ac73eda538907e672951f80b7a9e3a117084afa50f5b6baae2edf285cb04
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   universal_io:
     dependency: transitive
     description:

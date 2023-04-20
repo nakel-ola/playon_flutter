@@ -2,7 +2,7 @@ class Video {
   final bool? adult;
   final String? backdropPath;
   final List<dynamic>? genreIds;
-  final int? id;
+  final int id;
   final String? name;
   final String? description;
   final String? originalLanguage;
@@ -15,13 +15,13 @@ class Video {
   final dynamic voteAverage;
   final dynamic voteCount;
   final bool? video;
-  final String? type;
+  final String type;
 
   const Video({
     this.adult,
     this.backdropPath,
     this.genreIds,
-    this.id,
+    required this.id,
     this.name,
     this.description,
     this.originalLanguage,
@@ -34,14 +34,14 @@ class Video {
     this.voteAverage,
     this.voteCount,
     this.video,
-    this.type,
+    required this.type,
   });
 
   Video copyWith({
     bool? adult,
     String? backdropPath,
     List<dynamic>? genreIds,
-    dynamic id,
+    required dynamic id,
     String? name,
     String? description,
     String? originalLanguage,
@@ -54,7 +54,7 @@ class Video {
     dynamic voteAverage,
     dynamic voteCount,
     bool? video,
-    String? type,
+    required String type,
   }) {
     return Video(
       adult: adult ?? this.adult,
@@ -73,7 +73,7 @@ class Video {
       voteAverage: voteAverage ?? this.voteAverage,
       voteCount: voteCount ?? this.voteCount,
       video: video ?? this.video,
-      type: type ?? this.type,
+      type: type,
     );
   }
 

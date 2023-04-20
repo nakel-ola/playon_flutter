@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:provider/provider.dart';
 
 import '../../../assets.dart';
-import '../../../models/video.dart';
+import '../../../models/models.dart';
+import '../../../providers/details_provider.dart';
+import '../../../services/videos_service.dart';
+import '../../../utils/find_genre_by_ids.dart';
 
 class BannerCard extends StatelessWidget {
   final Video content;
@@ -11,8 +15,6 @@ class BannerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(content.toJson());
-
     return Stack(
       children: [
         SizedBox(
@@ -39,9 +41,15 @@ class BannerCard extends StatelessWidget {
         Positioned(
           bottom: 100,
           child: TitleCard(
+            id: content.id,
             genreIds: content.genreIds ?? [],
             name: content.title ?? content.name ?? content.originalTitle ?? "",
             releaseDate: content.releaseDate ?? "",
+            type: content.type,
+            onDetailPressed: () {
+              context.read<DetailsProvider>().addVideo(content);
+              Navigator.of(context).pushNamed("/details");
+            },
           ),
         ),
       ],
@@ -49,35 +57,48 @@ class BannerCard extends StatelessWidget {
   }
 }
 
-class TitleCard extends StatelessWidget {
+class TitleCard extends StatefulWidget {
   final List<dynamic> genreIds;
-  final String name, releaseDate;
+  final String name, releaseDate, type;
+  final int id;
+  final Function() onDetailPressed;
 
   const TitleCard({
     super.key,
     required this.genreIds,
     required this.name,
     required this.releaseDate,
+    required this.type,
+    required this.id,
+    required this.onDetailPressed,
   });
 
-  List<String> _getGenres() {
-    if (genreIds.isEmpty) return [];
+  @override
+  State<TitleCard> createState() => _TitleCardState();
+}
 
-    final List<dynamic> ids = genreIds.take(3).toList();
+class _TitleCardState extends State<TitleCard> {
+  VideosService videosService = VideosService();
+  List<Trailer> trailers = [];
 
-    final List<String> results = [];
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
-    for (var i = 0; i < ids.length; i++) {
-      final genre = Assets.genres.firstWhere((el) => el.id == ids[i]);
-      results.add(genre.name);
-    }
+  getData() async {
+    List<Trailer> items =
+        await videosService.getTrailers(widget.type, widget.id);
 
-    return results;
+    setState(() {
+      trailers = items;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final genres = _getGenres();
+    final genres = findGenreByIds(widget.genreIds);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -87,7 +108,7 @@ class TitleCard extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width - 10,
             child: Text(
-              name,
+              widget.name,
               style: const TextStyle(
                 fontSize: 40.0,
                 fontWeight: FontWeight.w500,
@@ -96,40 +117,68 @@ class TitleCard extends StatelessWidget {
               softWrap: true,
             ),
           ),
-          Text(releaseDate),
+          Text(widget.releaseDate),
           Text(genres.map((e) => e).join(" • ")),
           const SizedBox(height: 8.0),
           Row(
             children: [
-              ElevatedButton.icon(
-                onPressed: () {},
-                icon: const Icon(Iconsax.play5, size: 30.0),
-                label: const Text(
-                  "Watch trailer",
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 12.0,
+              if (trailers.isNotEmpty)
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Navigator.of(context).pushNamed(
+                    //   "/video_player",
+                    //   arguments: "${Assets.videoBaseUrl}?v=${trailers[0].key}",
+                    // );
+                  },
+                  icon: const Icon(Iconsax.play5, size: 30.0),
+                  label: const Text(
+                    "Watch trailer",
+                    style: TextStyle(fontSize: 16.0),
                   ),
-                  elevation: 2.0,
-                ),
-              ),
-              const SizedBox(width: 8.0),
-              Transform.rotate(
-                angle: 9.4,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Iconsax.info_circle,
-                    size: 30.0,
-                    color: Colors.white,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal: 12.0,
+                    ),
+                    elevation: 2.0,
                   ),
                 ),
-              )
+              if (trailers.isNotEmpty) const SizedBox(width: 8.0),
+              if (trailers.isNotEmpty)
+                Transform.rotate(
+                  angle: 9.4,
+                  child: IconButton(
+                    onPressed: () => widget.onDetailPressed(),
+                    icon: const Icon(
+                      Iconsax.info_circle,
+                      size: 30.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              if (trailers.isEmpty)
+                ElevatedButton.icon(
+                  onPressed: () => widget.onDetailPressed(),
+                  icon: Transform.rotate(
+                    angle: 9.4,
+                    child: const Icon(Iconsax.info_circle5, size: 30.0),
+                  ),
+                  label: const Text(
+                    "See details",
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal: 12.0,
+                    ),
+                    elevation: 2.0,
+                  ),
+                )
             ],
           ),
         ],

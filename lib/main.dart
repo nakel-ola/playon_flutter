@@ -9,7 +9,8 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => HomeProvider()),
+        ChangeNotifierProvider(create: (ctx) => HomeProvider()..initailize()),
+        ChangeNotifierProvider(create: (ctx) => DetailsProvider()),
       ],
       child: const MyApp(),
     ),
@@ -49,7 +50,13 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: "Rubik",
       ),
-      home: const TabsScreen(),
+      initialRoute: "/",
+      routes: {
+        "/": (_) => const TabsScreen(),
+        "/details": (_) => const DetailsScreen(),
+        "/search": (_) => const SearchScreen(),
+      },
     );
   }
 }
+
